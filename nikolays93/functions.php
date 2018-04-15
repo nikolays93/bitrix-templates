@@ -32,6 +32,34 @@ if( !function_exists('get_column_class') ) {
     }
 }
 
+if( !function_exists('get_main_column_class') ) {
+    function get_main_column_class()
+    {   
+        if( Conditions::is_catalog() )
+            return get_column_class('9/3');
+
+        if( function_exists( 'get_column_class' ) ) {
+            return Conditions::is_show_sidebar() ? get_column_class('9/3') : 'col-12';
+        }
+
+        return Conditions::is_show_sidebar() ? 'col-9' : 'col-12';
+    }
+}
+
+if( !function_exists('get_side_column_class') ) {
+    function get_side_column_class()
+    {
+        if( Conditions::is_catalog() )
+            return get_column_class('3/9');
+
+        if( function_exists( 'get_column_class' ) ) {
+            return Conditions::is_show_sidebar() ? get_column_class('3/9') : 'hidden';
+        }
+
+        return Conditions::is_show_sidebar() ? 'col-3' : 'hidden';
+    }
+}
+
 if( !function_exists('recursiveTermsUList') ) {
     /**
      * Рекурсивно получить ненумерованный(UL) список секций

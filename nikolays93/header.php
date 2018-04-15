@@ -17,65 +17,64 @@ $RESP = defined('TPL_RESPONSIVE') || TPL_RESPONSIVE;
 </head>
 <body class="<?$APPLICATION->ShowProperty('body-class');?>">
     <?$APPLICATION->ShowPanel();?>
-
+    <div class="left-menu">
+        <?$APPLICATION->IncludeComponent(
+	"bitrix:menu", 
+	".default", 
+	array(
+		"COMPONENT_TEMPLATE" => ".default",
+		"ROOT_MENU_TYPE" => "top",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"MENU_CACHE_GET_VARS" => array(
+		),
+		"MAX_LEVEL" => "1",
+		"CHILD_MENU_TYPE" => "top",
+		"USE_EXT" => "N",
+		"DELAY" => "N",
+		"ALLOW_MULTI_SELECT" => "N",
+		"LIST_CLASS" => "unstyled"
+	),
+	false
+);?>
+    </div>
     <div id="page" class="site">
-        <header class="site-header container">
+        <header class="site-header" style="background-image: url(<?$APPLICATION->ShowProperty('head__bg');?>);">
             <div class="container">
-                <div class="row">
-                    <div class="col-3 site-header__logotype">
-                        <a href="/"><img src="<?=TPL?>/img/logo.png" class="logotype"></a>
-                    </div><!-- .logotype -->
-
-                    <div class="col-3 site-header__phone">
-                        <?$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
-                            "AREA_FILE_SHOW" => "file",
-                            "PATH" => SITE_DIR . "include/head_phone.php" // [;)
-                        ), false);
-                        ?>
-                    </div><!-- .site-header__phone -->
-
-                    <div class="col-3 site-header__offer">
-                        <?$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
-                            "AREA_FILE_SHOW" => "file",
-                            "PATH" => SITE_DIR . "include/head_offer.php"
-                        ), false);
-                        ?>
-                    </div><!-- .site-header__offer -->
-                </div><!-- .row -->
+                <div class="row align-content-center text-center">
+                    <div class="col-1"></div>
+                    <div class="col-3">
+                        <img src="<?=TPL;?>/img/icon-social__instagram.png">
+                        <img src="<?=TPL;?>/img/icon-social__vk.png">
+                    </div>
+                    <div class="col-4 logotype">
+                        <a href="/">
+                            <img class="logotype__img" src="/images/logo.png">
+                        </a>
+                    </div>
+                    <div class="col-3 phonenumbers">
+                        <img class="phonenumbers__icon" src="<?=TPL;?>/img/icon__phone.png">
+                        <span class="prefix">+7 (3412)</span>
+                        <p class="number"> 62-01-88 </p>
+                        <p class="number"> 68-01-87 </p>
+                    </div>
+                    <div class="col-1">
+                        <img src="<?=TPL;?>/img/icon__cart.png">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-8 text-center">
+                        <h1 class="site-header__title">
+                            <?$APPLICATION->ShowProperty('head__title');?>
+                        </h1>
+                        <p class="site-header__description">
+                            <?$APPLICATION->ShowProperty('head__description');?>
+                        </p>
+                    </div>
+                </div>
             </div>
-
-            <nav class="site-header__navigation navbar navbar-expand-lg navbar-light bg-light">
-                <!-- <a class="navbar-brand" href="/"><img src="<?=TPL?>/img/logo.png" class="logotype"></a> -->
-                <?if( $RESP ):?>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <?endif?>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:menu",
-                        "bootstrap",
-                        array(
-                            "COMPONENT_TEMPLATE" => "bootstrap",
-                            "ROOT_MENU_TYPE" => "top",
-                            "MENU_CACHE_TYPE" => "N",
-                            "MENU_CACHE_TIME" => "3600",
-                            "MENU_CACHE_USE_GROUPS" => "Y",
-                            "MENU_CACHE_GET_VARS" => array(
-                            ),
-                            "MAX_LEVEL" => "1",
-                            "CHILD_MENU_TYPE" => "left",
-                            "USE_EXT" => "N",
-                            "DELAY" => "N",
-                            "ALLOW_MULTI_SELECT" => "N"
-                        ),
-                        false
-                        );
-                    ?>
-                </div><!-- .collapse -->
-            </nav>
-        </header><!-- .site-header -->
+        </header>
 
         <section class="site-content">
             <?if( ! is_front_page() ):?>
