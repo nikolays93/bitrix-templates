@@ -1,0 +1,2 @@
+BX.ready(function () {
+});

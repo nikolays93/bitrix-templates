@@ -1,0 +1,73 @@
+/*
+    @font-face {
+            font-family: "Myriad Pro";
+            src: url("assets/fonts/MyriadProRegular/MyriadProRegular.eot");
+            src: url("assets/fonts/MyriadProRegular/MyriadProRegular.eot?#iefix")format("embedded-opentype"),
+            url("assets/fonts/MyriadProRegular/MyriadProRegular.woff") format("woff"),
+            url("assets/fonts/MyriadProRegular/MyriadProRegular.ttf") format("truetype");
+            font-style: normal;
+            font-weight: normal;
+    }
+
+    @font-face {
+            font-family: "Myriad Pro";
+            src: url("assets/fonts/MyriadProBold/MyriadProBold.eot");
+            src: url("assets/fonts/MyriadProBold/MyriadProBold.eot?#iefix")format("embedded-opentype"),
+            url("assets/fonts/MyriadProBold/MyriadProBold.woff") format("woff"),
+            url("assets/fonts/MyriadProBold/MyriadProBold.ttf") format("truetype");
+            font-style: normal;
+            font-weight: bold;
+    }
+*/
+
+/********************************** Elements **********************************/
+    /*
+    body {
+        font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L",
+            "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }*/
+
+/*********************************** Header ***********************************/
+    #site-header {}
+
+/********************************* Navigations ********************************/
+    #main-navigation {
+        width: 100%;
+        background-color: #ccc;
+        margin-bottom: 20px;
+    }
+    #main-navigation .navbar {
+        padding: 0;
+        border-radius: 0;
+    }
+    #main-navigation .navbar-nav .nav-link {
+        color: #000;
+        padding: 10px 15px;
+    }
+    #main-navigation .navbar-nav .nav-link:hover,
+    #main-navigation .navbar-nav .nav-link:focus {
+        color: #444;
+    }
+    #main-navigation .navbar-nav .nav-link,
+    #main-navigation .navbar-nav .nav-link:hover,
+    #main-navigation .navbar-nav .nav-link:focus {
+        text-decoration: none;
+    }
+    #main-navigation .non-responsive .navbar-nav {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+    }
+    #main-navigation .non-responsive .navbar-brand {
+        display: none !important;
+    }
+
+/************************************ Side ************************************/
+
+
+/*********************************** Footer ***********************************/
+    #site-footer {}
+
+/*! @see styles.css for edit content styles */
