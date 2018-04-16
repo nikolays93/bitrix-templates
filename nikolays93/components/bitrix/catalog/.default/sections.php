@@ -18,10 +18,12 @@ Conditions::set_location('catalog', true);
 ?>
 <section class="shop">
 	<div class="row">
-		<div class="sidebar col-3">
+		<?php /*
+		<div class="sidebar <?php echo get_side_column_class();?>">
 			<?php include($_SERVER["DOCUMENT_ROOT"] . "/" . $this->GetFolder() . "/sidebar.php"); ?>
 		</div>
-		<div class="catalog col-9">
+		*/ ?>
+		<div class="catalog <?php echo get_main_column_class();?>">
 	        <?php
 	        Conditions::set_location('shop', true);
 	        include($_SERVER["DOCUMENT_ROOT"] . "/" . $this->GetFolder() . "/catalog.php");

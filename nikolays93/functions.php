@@ -12,21 +12,21 @@ if( !function_exists('get_column_class') ) {
         if( null === $RESP )
             $RESP = (defined( 'TPL_RESPONSIVE' ) && TPL_RESPONSIVE);
 
-        switch ( intval( $columns ) ) {
-            case 1: return 'col-12';
-            case 2: return 'col-12 col-lg-6';
-            case 3: return $RESP ? 'col-12 col-md-6 col-lg-4' : 'col-4';
-            case 5: return $RESP ? 'col-md-2-4' : 'col-2-4';
-            case 6: return $RESP ? 'col-xl-2 col-lg-3 col-md-4 col-sm-6' : 'col-2';
-            case 12: return 'col-1';
+        switch ( $columns ) {
+            case '1': return 'col-12';
+            case '2': return 'col-12 col-lg-6';
+            case '3': return $RESP ? 'col-12 col-md-6 col-lg-4' : 'col-4';
+            case '5': return $RESP ? 'col-md-2-4' : 'col-2-4';
+            case '6': return $RESP ? 'col-xl-2 col-lg-3 col-md-4 col-sm-6' : 'col-2';
+            case '12': return 'col-1';
 
-            case '3/9': return $RESP ? 'col-12 col-sm-4 col-md-3' : 'col-3';
-            case '9/3': return $RESP ? 'col-12 col-sm-8 col-md-9' : 'col-9';
+            case '3-9': return $RESP ? 'col-12 col-sm-4 col-md-3' : 'col-3';
+            case '9-3': return $RESP ? 'col-12 col-sm-8 col-md-9' : 'col-9';
 
-            case '4/8': return $RESP ? 'col-12 col-sm-4' : 'col-4';
-            case '8/4': return $RESP ? 'col-12 col-sm-8' : 'col-4';
+            case '4-8': return $RESP ? 'col-12 col-sm-4' : 'col-4';
+            case '8-4': return $RESP ? 'col-12 col-sm-8' : 'col-8';
 
-            case 4:
+            case '4':
             default: return $RESP ? 'col-lg-3 col-md-4 col-sm-6' : 'col-3';
         }
     }
@@ -34,12 +34,12 @@ if( !function_exists('get_column_class') ) {
 
 if( !function_exists('get_main_column_class') ) {
     function get_main_column_class()
-    {   
+    {
         if( Conditions::is_catalog() )
-            return get_column_class('9/3');
+            return get_column_class('9-3');
 
         if( function_exists( 'get_column_class' ) ) {
-            return Conditions::is_show_sidebar() ? get_column_class('9/3') : 'col-12';
+            return Conditions::is_show_sidebar() ? get_column_class('9-3') : 'col-12';
         }
 
         return Conditions::is_show_sidebar() ? 'col-9' : 'col-12';
@@ -50,10 +50,10 @@ if( !function_exists('get_side_column_class') ) {
     function get_side_column_class()
     {
         if( Conditions::is_catalog() )
-            return get_column_class('3/9');
+            return get_column_class('3-9');
 
         if( function_exists( 'get_column_class' ) ) {
-            return Conditions::is_show_sidebar() ? get_column_class('3/9') : 'hidden';
+            return Conditions::is_show_sidebar() ? get_column_class('3-9') : 'hidden';
         }
 
         return Conditions::is_show_sidebar() ? 'col-3' : 'hidden';
