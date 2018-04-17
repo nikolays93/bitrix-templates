@@ -25,49 +25,6 @@
     // }
 
 /*********************************** Header ***********************************/
-    $left_menu_space: 56px;
-    body {
-        // padding-left: 56px;
-    }
-    .left-menu {
-        position: fixed;
-        background: rgba(255, 255, 255, 0.5);
-        display: block;
-        left: -100%;
-        top: 0;
-        z-index: 99;
-        width: 100%;
-        text-align: right;
-
-        -webkit-transform: rotate(-90deg) translate($left_menu_space, 100%);
-           -moz-transform: rotate(-90deg) translate($left_menu_space, 100%);
-            -ms-transform: rotate(-90deg) translate($left_menu_space, 100%);
-             -o-transform: rotate(-90deg) translate($left_menu_space, 100%);
-                transform: rotate(-90deg) translate($left_menu_space, 100%);
-        -webkit-transform-origin: 100% 100%;
-           -moz-transform-origin: 100% 100%;
-            -ms-transform-origin: 100% 100%;
-             -o-transform-origin: 100% 100%;
-                transform-origin: 100% 100%;
-
-        .menu {
-            li {
-                display: inline-block;
-                a {
-                    display: block;
-                    padding: .5rem .5rem;
-                    letter-spacing: 4px;
-                }
-            }
-        //     // @media (min-width: 1200px) {
-        //     //     transform: rotate( -90deg );
-        //     // }
-        }
-    }
-
-    .site-header {
-        background-size: cover;
-    }
 
 /********************************* Navigations ********************************/
     #main-navigation {
@@ -109,6 +66,6 @@
 
 
 /*********************************** Footer ***********************************/
-    #site-footer {}
+    .site-footer {}
 
 /*! @see styles.css for edit content styles */

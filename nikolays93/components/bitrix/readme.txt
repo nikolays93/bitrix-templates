@@ -1,11 +1,15 @@
-Catalog (Комплексный компанент включающий в себя):
-	catalog.section.list (Список разделов)
-	catalog.section      (Список товаров)
-	catalog.item         (Товар (Карточка))
-	catalog.element      (Страница товара с детальной/подробной информацией)
+## news: Комплексный компонент включающий в себя (в основном) ##
+    - news.list:            Список записей инфоблока
+    - news.detail:          Детальное представление записи
 
-sale.basket.basket - Корзина
-sale.order.ajax    - Подтверждение заказа
+## сatalog: Комплексный компонент включающий в себя (в основном) ##
+	- catalog.section.list: Список разделов
+	- catalog.section:      Список товаров
+	- catalog.item:         Товар (Представление в списке)
+	- catalog.element:      Товар (Представление товара с детальной/подробной информацией)
 
-sale.personal.order - Персональная информация (/personal/order/)
-	sale.personal.order.list - Список заказов
+sale.basket.basket:       Корзина
+sale.order.ajax:          Подтверждение заказа
+
+sale.personal.order:      Персональная информация (/personal/order/)
+sale.personal.order.list: Список заказов

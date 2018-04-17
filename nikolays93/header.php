@@ -40,56 +40,37 @@ $RESP = defined('TPL_RESPONSIVE') || TPL_RESPONSIVE;
 );?>
     </div>
     <div id="page" class="site">
-        <header class="site-header" style="background-image: url(<?$APPLICATION->ShowProperty('head__bg');?>);">
+        <header class="site-header">
             <div class="container">
-                <div class="row align-content-center text-center">
-                    <div class="col-1"></div>
-                    <div class="col-3">
-                        <img src="<?=TPL;?>/img/icon-social__instagram.png">
-                        <img src="<?=TPL;?>/img/icon-social__vk.png">
-                    </div>
-                    <div class="col-4 logotype">
-                        <a href="/">
+                <div class="row align-content-center">
+                    <div class="col-3 logotype">
+                        <a href="<?=SITE_DIR?>">
                             <img class="logotype__img" src="/images/logo.png">
                         </a>
                     </div>
-                    <div class="col-3 phonenumbers">
-                        <img class="phonenumbers__icon" src="<?=TPL;?>/img/icon__phone.png">
-                        <span class="prefix">+7 (3412)</span>
-                        <p class="number"> 62-01-88 </p>
-                        <p class="number"> 68-01-87 </p>
-                    </div>
-                    <div class="col-1">
-                        <img src="<?=TPL;?>/img/icon__cart.png">
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-8 text-center">
-                        <h1 class="site-header__title">
-                            <?$APPLICATION->ShowProperty('head__title');?>
-                        </h1>
-                        <p class="site-header__description">
-                            <?$APPLICATION->ShowProperty('head__description');?>
-                        </p>
-                    </div>
+                    <div class="col-3 numbers"></div>
+                    <div class="col-3 contacts"></div>
+                    <div class="col-3 cart"></div>
                 </div>
             </div>
         </header>
 
         <section class="site-content">
-            <?if( ! is_front_page() ):?>
-            <section class="container site-content__breadcrumb">
-                <?$APPLICATION->IncludeComponent(
-                   "bitrix:breadcrumb", 
-                   ".default", 
-                   array(
-                      "PATH" => "",
-                      "SITE_ID" => "s1",
-                      "START_FROM" => "0",
-                      "COMPONENT_TEMPLATE" => ".default"
-                      ),
-                   false
-                   );?>
+            <?if( !is_front_page() ):?>
+            <section class="site-content__breadcrumb breadcrumb">
+                <div class="container">
+                    <?$APPLICATION->IncludeComponent(
+                       "bitrix:breadcrumb", 
+                       ".default", 
+                       array(
+                          "PATH" => "",
+                          "SITE_ID" => "s1",
+                          "START_FROM" => "0",
+                          "COMPONENT_TEMPLATE" => ".default"
+                          ),
+                       false
+                       );?>
+                </div>
             </section>
             <?endif;?>
 

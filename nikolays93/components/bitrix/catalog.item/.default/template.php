@@ -108,10 +108,7 @@ if (isset($arResult['ITEM']))
 		$templatePath = strtolower($arResult['TYPE']).'/template.php';
 
 		$file = new Main\IO\File($documentRoot.$templateFolder.'/'.$templatePath);
-		if ($file->isExists())
-		{
-			include($file->getPath());
-		}
+		if ($file->isExists()) include($file->getPath());
 
 		$jsParamsFILE = new Main\IO\File($documentRoot.$templateFolder.'/jsParams.php');
 		if ($jsParamsFILE->isExists()) include($jsParamsFILE->getPath());
