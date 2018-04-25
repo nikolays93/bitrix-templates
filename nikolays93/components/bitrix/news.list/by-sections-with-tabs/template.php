@@ -116,16 +116,16 @@ foreach ($elements as $id => $sectionElements) {
     $link = $arParams["HIDE_LINK_WHEN_NO_DETAIL"] ||
         ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"]) ? $arItem["DETAIL_PAGE_URL"] : false;
 
-    printf('<article class="article-element article-element_type_%s %s" id="%s">',
+    printf('<article class="element element_type_%s %s" id="%s">',
         $arParams['IBLOCK_CODE'],
         $columnClass,
         $this->GetEditAreaId($arItem['ID'])
     );
-    echo '<div class="article-element__content">';
+    echo '<div class="element__content">';
 
         if( "Y" == $arParams["DISPLAY_PICTURE"] ) {
             if( is_array($arItem["PREVIEW_PICTURE"]) ) {
-                $pp_class = 'article-element__picture';
+                $pp_class = 'element__picture';
                 $image = bx_get_image( $arItem["PREVIEW_PICTURE"], $args, true );
 
                 echo ( $link ) ?
@@ -133,24 +133,24 @@ foreach ($elements as $id => $sectionElements) {
                     sprintf('<div class="%s">%s</div>', $pp_class, $image);
             }
             else {
-                echo '<div class="article-element__picture article-element_empty"></div>';
+                echo '<div class="element__picture element_empty"></div>';
             }
         }
 
         if( "Y" == $arParams["DISPLAY_NAME"] && $arItem["NAME"] ) {
             if( ! $arParams["NAME_TAG"] ) $arParams["NAME_TAG"] = 'h3';
             echo $link ?
-                sprintf('<%1$s class="article-element__title"><a href="%3$s">%2$s</a></%1$s>',
+                sprintf('<%1$s class="element__title"><a href="%3$s">%2$s</a></%1$s>',
                     $arParams["NAME_TAG"], $arItem["NAME"], $link) :
-                sprintf('<%1$s class="article-element__title">%2$s</%1$s>', $arParams["NAME_TAG"], $arItem["NAME"]);
+                sprintf('<%1$s class="element__title">%2$s</%1$s>', $arParams["NAME_TAG"], $arItem["NAME"]);
         }
 
         if( "Y" == $arParams["DISPLAY_DATE"] && $arItem["DISPLAY_ACTIVE_FROM"]) {
-            printf('<div class="article-element__date">%s</div>', $arItem["DISPLAY_ACTIVE_FROM"]);
+            printf('<div class="element__date">%s</div>', $arItem["DISPLAY_ACTIVE_FROM"]);
         }
 
         if( "Y" == $arParams["DISPLAY_PREVIEW_TEXT"] && $arItem["PREVIEW_TEXT"]) {
-            echo sprintf('<div class="article-element__description">%s</div>', $arItem["PREVIEW_TEXT"]);
+            echo sprintf('<div class="element__description">%s</div>', $arItem["PREVIEW_TEXT"]);
         }
 
     echo "</div>";
