@@ -4,6 +4,8 @@
  * @global CUser $USER
  */
 
+if( ! defined('TPL') ) define('TPL', TPL);
+
 $assets = \Bitrix\Main\Page\Asset::getInstance();
 $min = ("N" == \Bitrix\Main\Config\Option::get("main", "use_minified_assets")) ? '' : '.min';
 ?>
@@ -28,35 +30,35 @@ $min = ("N" == \Bitrix\Main\Config\Option::get("main", "use_minified_assets")) ?
      * @see also: Настройки > Настройки продукта > Настройки модулей > Настройки главного модуля => Оптимизация CSS
      */
     // $assets->addCss('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/assets/font-awesome.min.css');
-    // $assets->addCss(SITE_TEMPLATE_PATH . '/assets/animate.min.css');
-    // $assets->addCss(SITE_TEMPLATE_PATH . '/assets/jquery.formstyler.css');
+    // $assets->addCss(TPL . '/assets/animate.min.css');
+    // $assets->addCss(TPL . '/assets/jquery.formstyler.css');
     if( function_exists('update_theme_style') ) update_theme_style();
-    $assets->addCss(SITE_TEMPLATE_PATH . '/assets/bootload-4/bootload'.$min.'.css');
+    $assets->addCss(TPL . '/assets/bootload-4/bootload'.$min.'.css');
 
     /**
      * JS
      */
     // \CJSCore::Init( array('jquery') );
     $assets->addJs('http://code.jquery.com/jquery-3.2.1.min.js');
-    $assets->addJs(SITE_TEMPLATE_PATH . '/assets/bootload-4/js/bootload'.$min.'.js');
-    // $assets->addJs(SITE_TEMPLATE_PATH . '/assets/jquery.maskedinput.min.js');
+    $assets->addJs(TPL . '/assets/bootload-4/js/bootload'.$min.'.js');
+    // $assets->addJs(TPL . '/assets/jquery.maskedinput.min.js');
 
     /** fancybox */
-    // $assets->addCss(SITE_TEMPLATE_PATH . '/assets/fancybox/jquery.fancybox'.$min.'.css');
-    // $assets->addJs(SITE_TEMPLATE_PATH . '/assets/fancybox/jquery.fancybox'.$min.'.js');
+    // $assets->addCss(TPL . '/assets/fancybox/jquery.fancybox'.$min.'.css');
+    // $assets->addJs(TPL . '/assets/fancybox/jquery.fancybox'.$min.'.js');
 
     /** slick */
-    // $assets->addCss('assets/slick/slick-theme.css');
-    // $assets->addCss(SITE_TEMPLATE_PATH . '/assets/slick/slick'.$min.'.css');
-    // $assets->addJs(SITE_TEMPLATE_PATH . '/assets/slick/slick'.$min.'.js');
+    // $assets->addCss(TPL . 'assets/slick/slick-theme.css');
+    // $assets->addCss(TPL . '/assets/slick/slick'.$min.'.css');
+    // $assets->addJs(TPL . '/assets/slick/slick'.$min.'.js');
 
     /** Masonry */
-    // $assets->addJs(SITE_TEMPLATE_PATH . '/assets/masonry/masonry.pkgd'.$min.'.js');
+    // $assets->addJs(TPL . '/assets/masonry/masonry.pkgd'.$min.'.js');
 
     /** VK Api */
     // $assets->addJs('https://vk.com/js/api/openapi.js?152');
 
-    // $assets->addJs(SITE_TEMPLATE_PATH . '/assets/script.js');
+    // $assets->addJs(TPL . '/assets/script.js');
 
     /**
      * BITRIX ->ShowHead()

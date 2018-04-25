@@ -1,6 +1,4 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-if( ! defined('TPL') ) define('TPL', SITE_TEMPLATE_PATH);
-$RESP = defined('TPL_RESPONSIVE') || TPL_RESPONSIVE;
 
 /**
 * @global CMain $APPLICATION
