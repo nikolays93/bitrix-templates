@@ -127,10 +127,15 @@ if( !function_exists('get_default_catalog_args') ) {
      * @return array          default args
      */
     function get_default_catalog_args( $keycode = null, &$arParams = array() ) {
+        // catalog.section = ['IBLOCK', 'FILTER', 'TPL', 'TPL_MESSAGES', 'URLS', 'CACHE', 'PRICE', 'BASKET', 'SLIDER']
+
         /** Основные параметры */
         $arrParams['IBLOCK'] = array(
             'IBLOCK_TYPE' => '1c_catalog', // Тип инфоблока
             'IBLOCK_ID'   => 7, // ID инфоблока
+            'COMPONENT_TEMPLATE' => 'books',
+            'FILTER_NAME' => 'arrCatalogFilter',
+            // 'CUSTOM_FILTER' => '',
         );
 
         /** Источник данных */
@@ -187,6 +192,7 @@ if( !function_exists('get_default_catalog_args') ) {
             // if N == SEF_MODE
             // 'SECTION_ID' => '',
             // 'ELEMENT_ID' => '',
+            'SEF_RULE' => '',
         );
 
         /* AJAX режим */
@@ -233,6 +239,7 @@ if( !function_exists('get_default_catalog_args') ) {
             'USE_COMPARE'     => 'N', //*Разрешить сравнение товаров
         );
 
+        /** Цена/Стоимость */
         $arrParams['PRICE'] = array(
             'PRICE_CODE' => array( // Тип цены
                 0 => 'BASE',
@@ -243,6 +250,159 @@ if( !function_exists('get_default_catalog_args') ) {
             'PRICE_VAT_SHOW_VALUE' => 'N', //*Отображать значение НДС
             'CONVERT_CURRENCY'     => 'N', // Показывать цены в одной валюте
         );
+
+        /** Корзина */
+        $arrParams['BASKET'] = array(
+            'BASKET_URL'                       => defined('PATH_TO_BASKET')? PATH_TO_BASKET : '/basket/', // URL, ведущий на страницу с корзиной покупателя
+            'USE_PRODUCT_QUANTITY'             => 'N', // Разрешить указание количества товара
+            'QUANTITY_FLOAT'                   => 'N', //*Разрешить указание дробного количества товара
+            'ADD_PROPERTIES_TO_BASKET'         => 'Y', // Добавлять в корзину свойства товаров и предложений
+            // 'USE_COMMON_SETTINGS_BASKET_POPUP' => '', //*Одинаковые настройки показа кнопок добавления в корзину или покупки на всех страницах
+            // 'COMMON_ADD_TO_BASKET_ACTION'      => '', //*Показывать кнопку добавления в корзину или покупки
+            // 'TOP_ADD_TO_BASKET_ACTION'         => '', //*Показывать кнопку добавления в корзину или покупки на странице с top'ом товаров
+            'SECTION_ADD_TO_BASKET_ACTION'     => 'ADD', //*Показывать кнопку добавления в корзину или покупки на странице списка товаров
+            // 'DETAIL_ADD_TO_BASKET_ACTION'      => '', //*Показывать кнопки добавления в корзину и покупки на детальной странице товара
+            // 'DETAIL_SHOW_BASIS_PRICE'          => '', //*Показывать на детальной странице цену за единицу товара
+        );
+
+        /** Поиск */
+        // $arrParams['SEARCH']
+        // RESTART
+        // NO_WORD_LOGIC
+        // USE_LANGUAGE_GUESS
+        // CHECK_DATES
+
+        /** Популярные(лучшие) товары */
+        $arrParams['TOP'] = array(
+            'SHOW_TOP_ELEMENTS' => 'N' // Выводить топ элементов
+        );
+
+        /** Настройки списка разделов */
+        $arrParams['SECTION_LIST'] = array(
+            'SECTION_COUNT_ELEMENTS' => 'N', //* Показывать количество элементов в разделе
+            'SECTION_TOP_DEPTH' => 1, // Максимальная отображаемая глубина разделов
+            'SECTIONS_VIEW_MODE' => 'TILE', //* Вид списка подразделов
+            'SECTIONS_SHOW_PARENT_NAME' => 'Y', //*Показывать название раздела
+        );
+
+        $arrParams['SECTION'] = array(
+            'PAGE_ELEMENT_COUNT'        => '9', // Количество элементов на странице
+            'LINE_ELEMENT_COUNT'        => '3', // Количество элементов, выводимых в одной строке таблицы
+            'ELEMENT_SORT_FIELD'        => 'sort', // По какому полю сортируем товары в разделе
+            'ELEMENT_SORT_FIELD2'       => 'id', // Порядок сортировки товаров в разделе
+            'ELEMENT_SORT_ORDER'        => 'asc', // Поле для второй сортировки товаров в разделе
+            'ELEMENT_SORT_ORDER2'       => 'desc', // Порядок второй сортировки товаров в разделе   
+            // 'LIST_PROPERTY_CODE'        => array(), // Свойства
+            'INCLUDE_SUBSECTIONS'       => 'Y', // Показывать элементы подразделов раздела
+            // 'LIST_META_KEYWORDS'        => '', // Установить ключевые слова страницы из свойства раздела 
+            // 'LIST_META_DESCRIPTION'     => '', // Установить описание страницы из свойства раздела
+            'LIST_BROWSER_TITLE'        => '', // Установить заголовок окна браузера из свойства раздела
+            // 'LIST_OFFERS_FIELD_CODE'    => '', // Поля предложений
+            // 'LIST_OFFERS_PROPERTY_CODE' => '', // Свойства предложений
+            'LIST_OFFERS_LIMIT'         => 5, // Максимальное количество предложений для показа
+            'SECTION_BACKGROUND_IMAGE'  => '-', // Установить фоновую картинку для шаблона из свойства
+            // ------------ in catalog.section
+            'SECTION_USER_FIELDS' => array(),
+            'SHOW_ALL_WO_SECTION' => 'Y',
+            'ENLARGE_PRODUCT' => 'STRICT',
+            'PRODUCT_BLOCKS_ORDER' => 'price,props,sku,quantityLimit,quantity,buttons,compare',
+            'SHOW_FROM_SECTION' => 'N',
+        );
+        $arrParams['SECTION']['PROPERTY_CODE'] = $arrParams['SECTION']['LIST_PROPERTY_CODE'];
+        $arrParams['SECTION']['PROPERTY_CODE_MOBILE'] = $arrParams['SECTION']['LIST_PROPERTY_CODE'];
+        $arrParams['SECTION']['OFFERS_LIMIT'] = $arrParams['SECTION']['LIST_OFFERS_LIMIT'];
+        $arrParams['SECTION']['BACKGROUND_IMAGE'] = $arrParams['SECTION']['SECTION_BACKGROUND_IMAGE'];
+        $arrParams['SECTION']['ADD_TO_BASKET_ACTION'] = $arrParams['BASKET']['SECTION_ADD_TO_BASKET_ACTION'];
+        $arrParams['SECTION']['BROWSER_TITLE'] = $arrParams['SECTION']['LIST_BROWSER_TITLE'];
+
+
+        $arrParams['DETAIL'] = array(
+            // 'DETAIL_PROPERTY_CODE'             => '', //*
+            // 'DETAIL_META_KEYWORDS'             => '', //*
+            // 'DETAIL_META_DESCRIPTION'          => '', //*
+            // 'DETAIL_BROWSER_TITLE'             => '', //*
+            // 'DETAIL_SET_CANONICAL_URL'         => '', //*
+            'SECTION_ID_VARIABLE'              => 'SECTION_ID', // Название переменной, в которой передается код группы
+            // 'DETAIL_CHECK_SECTION_ID_VARIABLE' => '', //*
+            // 'DETAIL_OFFERS_FIELD_CODE'         => '', //*
+            // 'DETAIL_OFFERS_PROPERTY_CODE'      => '', //*
+            // 'DETAIL_BACKGROUND_IMAGE'          => '', //*
+            // 'SHOW_DEACTIVATED'                 => '', //*
+            // 'DETAIL_USE_VOTE_RATING'           => '', //*
+            // 'DETAIL_USE_COMMENTS'              => '', //*
+            // 'DETAIL_BRAND_USE'                 => '', //*
+            // 'DETAIL_DISPLAY_NAME'              => '', //*
+            // 'DETAIL_DETAIL_PICTURE_MODE'       => '', //*
+            // 'DETAIL_ADD_DETAIL_TO_SLIDER'      => '', //*
+            // 'DETAIL_DISPLAY_PREVIEW_TEXT_MODE' => '', //*
+            // 'DETAIL_PRODUCT_INFO_BLOCK_ORDER'  => '', //*
+            // 'DETAIL_PRODUCT_PAY_BLOCK_ORDER'   => '', //*
+        );
+
+        $arrParams['SLIDER'] = array(
+            'SHOW_SLIDER'                      => 'Y', // Показывать слайдер для товаров
+            'SLIDER_INTERVAL'                  => '4000', // Интервал смены слайдов, мс
+            'SLIDER_PROGRESS'                  => 'N', // Показывать полосу прогресса
+        );
+
+
+// 
+
+
+
+// 'BROWSER_TITLE' => '-',
+// 'COMPATIBLE_MODE' => 'Y',
+// 
+// 'DETAIL_URL' => '',
+// 'DISABLE_INIT_JS_IN_COMPONENT' => 'N',
+// 'DISPLAY_BOTTOM_PAGER' => 'N',
+// 'DISPLAY_TOP_PAGER' => 'N',
+
+
+// 'LAZY_LOAD' => 'N',
+// 
+// 'LOAD_ON_SCROLL' => 'N',
+// 'MESSAGE_404' => '',
+
+// 'META_DESCRIPTION' => '-',
+// 'META_KEYWORDS' => '-',
+// 'PAGER_BASE_LINK_ENABLE' => 'N',
+// 'PAGER_DESC_NUMBERING' => 'N',
+// 'PAGER_DESC_NUMBERING_CACHE_TIME' => '36000',
+// 'PAGER_SHOW_ALL' => 'N',
+// 'PAGER_SHOW_ALWAYS' => 'N',
+// 'PAGER_TEMPLATE' => '.default',
+// 'PAGER_TITLE' => 'Товары',
+// 'PARTIAL_PRODUCT_PROPERTIES' => 'N',
+
+// 'PRODUCT_PROPERTIES' => array(
+// ),
+// 'PRODUCT_PROPS_VARIABLE' => 'prop',
+// 'PRODUCT_QUANTITY_VARIABLE' => 'quantity',
+// 'PRODUCT_ROW_VARIANTS' => '[{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false}]',
+// 
+
+
+// 'RCM_PROD_ID' => $_REQUEST['PRODUCT_ID'],
+// 'RCM_TYPE' => 'personal',
+// 'SECTION_CODE' => '',
+// 'SECTION_ID' => $_REQUEST['SECTION_ID'],
+
+// 'SECTION_URL' => '',
+
+
+
+
+// 'SET_META_DESCRIPTION' => 'Y',
+// 'SET_META_KEYWORDS' => 'Y',
+// 'SET_STATUS_404' => 'N',
+
+// 'SHOW_404' => 'N',
+// 'SHOW_CLOSE_POPUP' => 'N',
+// 'USE_ENHANCED_ECOMMERCE' => 'N',
+
+
+
 
         if( !$keycode ) {
             foreach ($arrParams as $params_block) {
