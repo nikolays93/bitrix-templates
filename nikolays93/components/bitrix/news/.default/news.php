@@ -1,4 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+
+use Bitrix\Main;
+use Bitrix\Main\Security\Random;
+
 /** @var array $arParams */
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
@@ -11,6 +15,17 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
+$form_id = 'form-' . Random::getInt(0, 999);
+
+$assets = Main\Page\Asset::getInstance();
+$min = ("N" == Main\Config\Option::get("main", "use_minified_assets")) ? '' : '.min';
+
+$assets->addCss(TPL . '/assets/fancybox/jquery.fancybox'.$min.'.css');
+$assets->addJs(TPL . '/assets/fancybox/jquery.fancybox'.$min.'.js');
+
+$documentRoot = Main\Application::getDocumentRoot();
+$folder = $this->GetFolder();
 ?>
 
 <?php if("Y" == $arParams["USE_RSS"]) : ?>
@@ -30,23 +45,13 @@ $this->setFrameMode(true);
     </div>
 <?php endif; ?>
 
-<?php if("Y" == $arParams["USE_SEARCH"]) : ?>
-    <div class="search-component">
-        <?php
-        echo GetMessage("SEARCH_LABEL");
-        $APPLICATION->IncludeComponent(
-            "bitrix:search.form",
-            "flat",
-            Array(
-                "PAGE" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["search"]
-            ),
-            false // $component get default template
-        );
-        ?>
-    </div>
-<?php endif; ?>
+<?php
+if("Y" == $arParams["USE_SEARCH"]) {
+    $file = new Main\IO\File( $documentRoot . $folder . "/search-form.php" );
+    if ($file->isExists()) include($file->getPath());
+}
 
-<?php if("Y" == $arParams["USE_FILTER"]) : ?>
+if("Y" == $arParams["USE_FILTER"]) : ?>
     <div class="filter-component">
         <?php
         $APPLICATION->IncludeComponent(
@@ -69,13 +74,17 @@ $this->setFrameMode(true);
     </div>
 <?php endif; ?>
 
-
 <?
-$arParams['COLUMNS'] = 1;
-$arParams['DISPLAY_MORE_LINK'] = 'Y';
+foreach ($arParams as $arParamKey => $arParam) {
+    if( 0 === strpos($arParamKey, 'LIST_') ) {
+        $arParams[ str_replace('LIST_', '', $arParamKey) ] = $arParam;
+        unset( $arParams[ $arParamKey ] );
+    }
+}
+
 $APPLICATION->IncludeComponent(
     "bitrix:news.list",
-    "archive",
+    ".default",
     $arParams, // experiment
     $component
 );?>

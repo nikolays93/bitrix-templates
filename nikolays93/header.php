@@ -15,42 +15,52 @@
 </head>
 <body class="<?$APPLICATION->ShowProperty('body-class');?>">
     <?$APPLICATION->ShowPanel();?>
-    <div class="left-menu">
-        <?$APPLICATION->IncludeComponent(
-	"bitrix:menu", 
-	".default", 
-	array(
-		"COMPONENT_TEMPLATE" => ".default",
-		"ROOT_MENU_TYPE" => "top",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"MENU_CACHE_GET_VARS" => array(
-		),
-		"MAX_LEVEL" => "1",
-		"CHILD_MENU_TYPE" => "top",
-		"USE_EXT" => "N",
-		"DELAY" => "N",
-		"ALLOW_MULTI_SELECT" => "N",
-		"LIST_CLASS" => "unstyled"
-	),
-	false
-);?>
-    </div>
+
     <div id="page" class="site">
         <header class="site-header">
             <div class="container">
-                <div class="row align-content-center">
+                <div class="row align-content-center" itemscope itemtype="http://schema.org/Organization">
                     <div class="col-3 logotype">
-                        <a href="<?=SITE_DIR?>">
-                            <img class="logotype__img" src="/images/logo.png">
-                        </a>
+                        <?$APPLICATION->IncludeFile(
+                            SITE_DIR . "include/head.logotype.php",
+                            array(),
+                            Array("MODE" => "html")
+                        );?>
                     </div>
-                    <div class="col-3 numbers"></div>
-                    <div class="col-3 contacts"></div>
-                    <div class="col-3 cart"></div>
+                    <div class="col-3 numbers">
+                        <?$APPLICATION->IncludeFile(
+                            SITE_DIR . "include/head.numbers.php",
+                            array(),
+                            Array("MODE" => "html")
+                        );?>
+                    </div>
+                    <div class="col-3 contacts">
+                        <?$APPLICATION->IncludeFile(
+                            SITE_DIR . "include/head.contacts.php",
+                            array(),
+                            Array("MODE" => "html")
+                        );?>
+                    </div>
+                    <div class="col-3 mini-cart"></div>
                 </div>
             </div>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <!-- <a class="navbar-brand" href="#">Navbar</a> 
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>-->
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <?$APPLICATION->IncludeFile(
+                            $APPLICATION->GetTemplatePath("include/navbar.php"),
+                            array(),
+                            array('SHOW_BORDER' => false)
+                        );?>
+                    </div>
+                </div><!-- .container -->
+            </nav>
         </header>
 
         <section class="site-content">
