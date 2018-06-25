@@ -5,7 +5,7 @@
 * @global CUser $USER
 */
 ?><!DOCTYPE html>
-<html lang="ru-RU">
+<html class="no-js" lang="ru-RU">
 <head>
     <?$APPLICATION->IncludeFile(
         $APPLICATION->GetTemplatePath("include/head.php"),
@@ -15,6 +15,9 @@
 </head>
 <body class="<?$APPLICATION->ShowProperty('body-class');?>">
     <?$APPLICATION->ShowPanel();?>
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="https://browsehappy.com/">обновите ваш браузер</a> для лучшего отображения и безопасности.</p>
+    <![endif]-->
 
     <div id="page" class="site">
         <header class="site-header">
