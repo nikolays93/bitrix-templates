@@ -1,0 +1,15 @@
+// phpscss compatibility
+$grid-breakpoints: (
+  xs: $media-xs,
+  sm: $media-sm,
+  md: $media-md,
+  lg: $media-lg,
+  xl: $media-xl
+) !default;
+
+$container-max-widths: (
+  sm: $container-sm,
+  md: $container-md,
+  lg: $container-lg,
+  xl: $container-xl
+) !default;
