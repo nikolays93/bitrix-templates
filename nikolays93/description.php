@@ -1,7 +1,7 @@
 <?
 $arTemplate = array (
-  'NAME' => 'Seo18',
-  'DESCRIPTION' => 'Template by SEO18',
+  'NAME' => 'Starter',
+  'DESCRIPTION' => 'Developer\'s starter theme',
   'SORT' => 10,
   'TYPE' => '',
 );
