@@ -4,7 +4,8 @@
  * @global CUser $USER
  */
 
-if( ! defined('TPL') ) define('TPL', TPL);
+if( !defined('TPL') )
+    define('TPL', SITE_TEMPLATE_PATH);
 
 $assets = \Bitrix\Main\Page\Asset::getInstance();
 $min = ("N" == \Bitrix\Main\Config\Option::get("main", "use_minified_assets")) ? '' : '.min';
@@ -33,14 +34,14 @@ $min = ("N" == \Bitrix\Main\Config\Option::get("main", "use_minified_assets")) ?
     // $assets->addCss(TPL . '/assets/animate.min.css');
     // $assets->addCss(TPL . '/assets/jquery.formstyler.css');
     if( function_exists('update_theme_style') ) update_theme_style();
-    $assets->addCss(TPL . '/assets/bootload-4/bootload'.$min.'.css');
+    $assets->addCss(TPL . '/assets/bootstrap'.$min.'.css');
 
     /**
      * JS
      */
     // \CJSCore::Init( array('jquery') );
     $assets->addJs('http://code.jquery.com/jquery-3.2.1.min.js');
-    $assets->addJs(TPL . '/assets/bootload-4/js/bootload'.$min.'.js');
+    $assets->addJs(TPL . '/assets/bootstrap'.$min.'.js');
     // $assets->addJs(TPL . '/assets/jquery.maskedinput.min.js');
 
     /** fancybox */
