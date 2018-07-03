@@ -14,14 +14,37 @@ foreach ($arResult["ITEMS"] as &$arItem) {
     $arItem['DETAIL_PAGE_URL'] = ("N" != $arParams["HIDE_LINK_WHEN_NO_DETAIL"]) ||
         ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"]) ? $arItem["DETAIL_PAGE_URL"] : false;
 
-    if( !empty($arItem['PROPERTIES']['EXTERNAL_LINK']['VALUE']) ) {
-        $arItem['DETAIL_PAGE_URL'] = $arItem['PROPERTIES']['EXTERNAL_LINK']['VALUE'];
+    /**
+     * @todo
+     * /
+    if( !empty($arItem['PROPERTIES'][ $arParams['EXTERNAL_LINK_PROPERTY'] ]['VALUE']) ) {
+        $arItem['DETAIL_PAGE_URL'] = $arItem['PROPERTIES'][ $arParams['EXTERNAL_LINK_PROPERTY'] ]['VALUE'];
         $more = 'читать в источнике';
-    }
+    } // */
 
     if( !empty($arItem['DETAIL_PAGE_URL']) && "Y" == $arParams["DISPLAY_MORE_LINK"] )
         $arItem['DETAIL_PAGE_URL_HTML'] = '<a class="item__more" href="' .$arItem['DETAIL_PAGE_URL']. '">' .$more. '</a>';
-
-    if( "Y" == $arParams['HIDE_GLOBAL_LINK'] )
-        $arItem['DETAIL_PAGE_URL'] = '';
 }
+
+$sectClass = array(
+    'news-list',
+    $arParams['ITEM_CLASS'] . "-list",
+    "news-list_type_" . $arParams['IBLOCK_CODE'],
+    "news-list_id_" . $arParams['IBLOCK_ID'],
+);
+$arResult['SECTION_CLASS'] = implode(' ', $sectClass);
+
+if( empty($arParams['ROW_CLASS']) )
+    $arParams['ROW_CLASS'] = 'row';
+
+if( empty($arParams['COLUMNS']) )
+    $arParams['COLUMNS'] = 1;
+
+$arParams['COLUMN_CLASS'] = function_exists('get_column_class') ?
+    get_column_class($arParams['COLUMNS']) : 'columns-' . $arParams['COLUMNS'];
+
+if( empty($arParams['ITEM_CLASS']) )
+    $arParams['ITEM_CLASS'] = 'item';
+
+if( empty($arParams["NAME_TAG"]) )
+    $arParams["NAME_TAG"] = 'h3';

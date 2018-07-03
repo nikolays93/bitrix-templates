@@ -12,7 +12,7 @@ if( !function_exists('get_column_class') ) {
         if( null === $RESP )
             $RESP = (defined( 'TPL_RESPONSIVE' ) && TPL_RESPONSIVE);
 
-        switch ( $columns ) {
+        switch ( strval($columns) ) {
             case '1': return 'col-12';
             case '2': return 'col-12 col-lg-6';
             case '3': return $RESP ? 'col-12 col-md-6 col-lg-4' : 'col-4';
@@ -29,34 +29,6 @@ if( !function_exists('get_column_class') ) {
             case '4':
             default: return $RESP ? 'col-lg-3 col-md-4 col-sm-6' : 'col-3';
         }
-    }
-}
-
-if( !function_exists('get_main_column_class') ) {
-    function get_main_column_class()
-    {
-        // if( Conditions::is_catalog() )
-        //     return get_column_class('9-3');
-
-        if( function_exists( 'get_column_class' ) ) {
-            return Conditions::is_show_sidebar() ? get_column_class('9-3') : 'col-12';
-        }
-
-        return Conditions::is_show_sidebar() ? 'col-9' : 'col-12';
-    }
-}
-
-if( !function_exists('get_side_column_class') ) {
-    function get_side_column_class()
-    {
-        // if( Conditions::is_catalog() )
-        //     return get_column_class('3-9');
-
-        if( function_exists( 'get_column_class' ) ) {
-            return Conditions::is_show_sidebar() ? get_column_class('3-9') : 'hidden';
-        }
-
-        return Conditions::is_show_sidebar() ? 'col-3' : 'hidden';
     }
 }
 
@@ -344,10 +316,6 @@ if( !function_exists('get_default_catalog_args') ) {
             'SLIDER_INTERVAL'                  => '4000', // Интервал смены слайдов, мс
             'SLIDER_PROGRESS'                  => 'N', // Показывать полосу прогресса
         );
-
-
-// 
-
 
 
 // 'BROWSER_TITLE' => '-',
