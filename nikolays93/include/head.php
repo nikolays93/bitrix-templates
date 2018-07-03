@@ -7,6 +7,9 @@
 if( !defined('TPL') )
     define('TPL', SITE_TEMPLATE_PATH);
 
+$sections = Conditions::get_dir_sections();
+$APPLICATION->SetProperty('page-class', implode(' ', $sections));
+
 $assets = \Bitrix\Main\Page\Asset::getInstance();
 $min = ("N" == \Bitrix\Main\Config\Option::get("main", "use_minified_assets")) ? '' : '.min';
 ?>

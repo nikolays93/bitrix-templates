@@ -13,13 +13,13 @@
         array('SHOW_BORDER' => false)
     );?>
 </head>
-<body class="<?$APPLICATION->ShowProperty('body-class');?>">
+<body class="<?=is_front_page() ? 'home' : 'inner';?>">
     <?$APPLICATION->ShowPanel();?>
     <!--[if lte IE 9]>
         <p class="browserupgrade">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="https://browsehappy.com/">обновите ваш браузер</a> для лучшего отображения и безопасности.</p>
     <![endif]-->
 
-    <div id="page" class="site">
+    <div id="page" class="site page-<?=$APPLICATION->ShowProperty('page-class');?>">
         <header class="site-header">
             <div class="container">
                 <div class="row align-content-center" itemscope itemtype="http://schema.org/Organization">
