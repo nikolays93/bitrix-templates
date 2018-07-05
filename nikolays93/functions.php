@@ -3,32 +3,44 @@
 if( !function_exists('get_column_class') ) {
     /**
      * Получение класса элемента в bootstrap 4 сетке по количеству элементов в строке
-     * @param  Integer $columns количество элементов в строке
+     * @param  Str/Int $columns количество элементов в строке
      * @var Константа определенная в constants.php.
      *      Определяет возможность исползования адаптивной верстки
      * @return String
      */
-    function get_column_class( $columns, $RESP = null ) {
-        if( null === $RESP )
-            $RESP = (defined( 'TPL_RESPONSIVE' ) && TPL_RESPONSIVE);
+    function get_column_class( $columns = 0, $less = false, $responsive = null ) {
+        if( null === $responsive )
+            $responsive = (defined( 'TPL_RESPONSIVE' ) && TPL_RESPONSIVE);
 
-        switch ( strval($columns) ) {
-            case '1': return 'col-12';
-            case '2': return 'col-12 col-lg-6';
-            case '3': return $RESP ? 'col-12 col-md-6 col-lg-4' : 'col-4';
-            case '5': return $RESP ? 'col-md-2-4' : 'col-2-4';
-            case '6': return $RESP ? 'col-xl-2 col-lg-3 col-md-4 col-sm-6' : 'col-2';
-            case '12': return 'col-1';
+        if( $responsive ) {
+            switch ( strval($columns) ) {
+                case '1':   $cl = 'col-12'; break;
+                case '2':   $cl = 'col-12 col-lg-6'; break;
+                case '3':   $cl = 'col-12 col-md-6 col-lg-4'; break;
 
-            case '3-9': return $RESP ? 'col-12 col-sm-4 col-md-3' : 'col-3';
-            case '9-3': return $RESP ? 'col-12 col-sm-8 col-md-9' : 'col-9';
+                case '5':   $cl = 'col-6 col-sm-6 col-md-2-4'; break;
+                case '6':   $cl = 'col-6 col-md-4 col-lg-3 col-xl-2'; break;
+                case '12':  $cl = 'col-1'; break; // !@#??
 
-            case '4-8': return $RESP ? 'col-12 col-sm-4' : 'col-4';
-            case '8-4': return $RESP ? 'col-12 col-sm-8' : 'col-8';
+                case '3-9': $cl = 'col-12 col-sm-4 col-md-3'; break;
+                case '9-3': $cl = 'col-12 col-sm-8 col-md-9'; break;
 
-            case '4':
-            default: return $RESP ? 'col-lg-3 col-md-4 col-sm-6' : 'col-3';
+                case '4-8': $cl = 'col-12 col-sm-4'; break;
+                case '8-4': $cl = 'col-12 col-sm-8'; break;
+
+                case '4':
+                default: $cl = 'col-6 col-sm-6 col-md-4 col-lg-3'; break;
+            }
+
+            if( $less ) { // && is_int($columns) && $columns > 3
+                $cl = str_replace('col-6', 'col-12', $cl);
+            }
         }
+        else {
+            $cl = 'col-' . str_replace('.', '-', strval($columns / 12));
+        }
+
+        return $cl;
     }
 }
 
