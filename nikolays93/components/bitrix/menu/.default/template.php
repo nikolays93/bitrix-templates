@@ -1,20 +1,46 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
-if( !$arParams["LIST_CLASS"] ) $arParams["LIST_CLASS"] = 'unstyled';
 if( !empty( $arResult ) ) {
-    printf('<ul class="list-%s menu">', $arParams["LIST_CLASS"]);
+    $previousLevel = 0;
+    printf('<ul class="list-%s menu root">', $arParams["LIST_CLASS"]);
 
     foreach($arResult as $arItem) {
-        if($arParams["MAX_LEVEL"] == 1 && $arItem["DEPTH_LEVEL"] > 1)
-            continue;
+        $arItem["CLASS"] = 'menu__item';
+        $arItem["LINK_TITLE_ATTR"] = '';
+        if( "D" > $arItem["PERMISSION"] ) {
+            $arItem["LINK"] = '#';
+            $arItem["LINK_TITLE_ATTR"] = ' title="' .GetMessage("MENU_ITEM_ACCESS_DENIED"). '"';
+            $arItem["CLASS"] .= ' denied';
+        }
 
-        printf('<li><a href="%s" class="%s">%s</a></li>',
+        if( $arItem["IS_PARENT"] )
+            $arItem["CLASS"] .= ' has-child';
+
+        if( $arItem["SELECTED"] )
+            $arItem["CLASS"] .= ' active selected';
+
+        if ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel) {
+            echo str_repeat("</ul></li>", ($previousLevel - $arItem["DEPTH_LEVEL"]));
+        }
+
+        printf('<li class="%s"><a href="%s"%s>%s</a>',
+            $arItem["CLASS"],
             $arItem["LINK"],
-            $arItem["SELECTED"] ?
-                sprintf('list-%s-item active selected', $arParams["LIST_CLASS"]) :
-                sprintf('list-%s-item', $arParams["LIST_CLASS"]),
+            $arItem["LINK_TITLE_ATTR"],
             $arItem["TEXT"] );
+
+        if ($arItem["IS_PARENT"])
+            printf('<ul class="list-%s menu child">', $arParams["LIST_CLASS"]);
+        else
+            echo '</li>';
+
+        $previousLevel = $arItem["DEPTH_LEVEL"];
+    }
+
+    if ($previousLevel > 1) {
+        echo str_repeat("</ul></li>", ($previousLevel-1) ); //close last item tags
     }
 
     echo '</ul>';
 }
+?>
