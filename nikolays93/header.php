@@ -4,6 +4,16 @@
 * @global CMain $APPLICATION
 * @global CUser $USER
 */
+
+$sections = Conditions::get_dir_sections();
+if( sizeof( $sections ) )
+    $APPLICATION->SetPageProperty('page-class', ' page-' . implode(' ', $sections));
+
+if( $filename = Conditions::seekSection('sidebar') ) {
+    $APPLICATION->SetPageProperty('content-class', 'col-10');
+    Conditions::set_arg('sidebar', $filename);
+}
+
 ?><!DOCTYPE html>
 <html class="no-js" lang="ru-RU">
 <head>
@@ -19,7 +29,7 @@
         <p class="browserupgrade">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="https://browsehappy.com/">обновите ваш браузер</a> для лучшего отображения и безопасности.</p>
     <![endif]-->
 
-    <div id="page" class="site page-<?=$APPLICATION->ShowProperty('page-class');?>">
+    <div id="page" class="site<?=$APPLICATION->ShowProperty('page-class');?>">
         <header class="site-header">
             <div class="container">
                 <div class="row align-content-center" itemscope itemtype="http://schema.org/Organization">
@@ -87,5 +97,17 @@
 
             <div class="<?$APPLICATION->ShowProperty("container-class", "container"); // or container-fluid ?>">
                 <div class="row">
+                    <?if( $sidebar = Conditions::get_arg('sidebar') ):?>
+                        <div class="sidebar-left col-2">
+                            <section id="sidebar-left">
+                                <?$APPLICATION->IncludeFile(
+                                    $sidebar,
+                                    array(),
+                                    array('SHOW_BORDER' => false)
+                                );?>
+                            </section>
+                        </div>
+                    <?endif;?>
+
                     <div class="site-column site-column_content <?$APPLICATION->ShowProperty(
-                        "content-class", DEFAULT_COLUMN_MAIN );?>">
+                        "content-class", 'col-12' );?>">

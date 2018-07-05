@@ -5,26 +5,6 @@
  */
 ?>
                     </div><!-- .site-content__main-column -->
-
-                <?php if( Conditions::is_show_sidebar( 'left' ) ) : ?>
-                    <div class="<?$APPLICATION->ShowProperty("sidebar-class", DEFAULT_COLUMN_SIDEBAR);?>">
-                        <section id="sidebar-left">
-                            <?$APPLICATION->IncludeComponent(
-                                "bitrix:main.include",
-                                "",
-                                Array(
-                                    "AREA_FILE_SHOW" => "sect",
-                                    "AREA_FILE_SUFFIX" => "sidebar",
-                                    "AREA_FILE_RECURSIVE" => "Y",
-                                    "EDIT_MODE" => "html",
-                                ),
-                                false,
-                                Array('HIDE_ICONS' => 'Y')
-                                );?>
-                        </section>
-                    </div>
-                <?php endif; ?>
-
                 </div><!-- .row -->
             </div><!-- .container -->
         </section><!-- .site-content -->
