@@ -324,6 +324,16 @@ $arTemplateParameters['DISPLAY_NAME'] = array(
 	'TYPE' => 'CHECKBOX',
 	'DEFAULT' => 'Y'
 );
+$arTemplateParameters['DISPLAY_NAME_POS'] = array(
+	'PARENT' => 'VISUAL',
+	'NAME' => GetMessage('CP_BCE_TPL_DISPLAY_NAME_POS'),
+	'TYPE' => 'LIST',
+	'VALUES' => array(
+		'outside' => GetMessage('CP_BCE_TPL_OUTSIDE'),
+		'inside' => GetMessage('CP_BCE_TPL_INSIDE'),
+	),
+	'DEFAULT' => 'outside',
+);
 $arTemplateParameters['IMAGE_RESOLUTION'] = array(
 	'PARENT' => 'VISUAL',
 	'NAME' => GetMessage('CP_BCE_TPL_IMAGE_RESOLUTION'),
