@@ -23,13 +23,13 @@ if( $filename = Conditions::seekSection('sidebar') ) {
         array('SHOW_BORDER' => false)
     );?>
 </head>
-<body class="<?=is_front_page() ? 'home' : 'inner';?>">
+<body <?php body_class(); ?>>
     <?$APPLICATION->ShowPanel();?>
     <!--[if lte IE 9]>
         <p class="browserupgrade">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="https://browsehappy.com/">обновите ваш браузер</a> для лучшего отображения и безопасности.</p>
     <![endif]-->
 
-    <div id="page" class="site<?=$APPLICATION->ShowProperty('page-class');?>">
+    <div id="page" class="site <?=is_front_page() ? 'home' : 'inner';?>">
         <header class="site-header">
             <div class="container">
                 <div class="row align-content-center" itemscope itemtype="http://schema.org/Organization">
