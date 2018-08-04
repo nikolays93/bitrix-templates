@@ -1,5 +1,32 @@
 <?php
 
+if( !function_exists('body_class') ) {
+    function body_class()
+    {
+        global $APPLICATION;
+
+        /**
+         * @todo
+         * $APPLICATION->AddBufferContent('ShowBodyClass');
+         */
+
+        $class = '';
+        if( class_exists('Conditions') ) {
+            $sections = Conditions::get_dir_sections();
+
+            if( function_exists('esc_attr') )
+                $sections = array_filter($sections, 'esc_attr');
+
+            $class = 'page-' . implode(' ', $sections);
+        }
+
+        echo 'class="';
+        echo $class . ' ';
+        $APPLICATION->ShowProperty('body-class');
+        echo '"';
+    }
+}
+
 if( !function_exists('get_column_class') ) {
     /**
      * Получение класса элемента в bootstrap 4 сетке по количеству элементов в строке
