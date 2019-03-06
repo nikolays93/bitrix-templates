@@ -1,6 +1,21 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
+\Bitrix\Main\Loader::includeModule('iblock');
+
+$rsSection = \Bitrix\Iblock\SectionTable::getList(array(
+    'filter' => array(
+        'IBLOCK_ID' => $arCurrentValues["IBLOCK_ID"],
+    ),
+
+    'select' =>  array('ID', 'NAME'),
+));
+
+$arSections = array('' => 'Не указано');
+foreach ($rsSection as $arSection) {
+	$arSections[ $arSection['ID'] ] = $arSection['NAME'];
+}
+
 $arTemplateParameters = array(
 	"ROW_CLASS" => Array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_ROW_CLASS"),
@@ -70,6 +85,14 @@ $arTemplateParameters = array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_MORE_LINK_TEXT"),
 		"TYPE" => "TEXT",
 		"DEFAULT" => GetMessage("T_IBLOCK_VALUE_NEWS_MORE_LINK_TEXT"),
+	),
+
+	"PARENT_SECTION" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Категория",
+		"TYPE" => "LIST",
+		"DEFAULT" => '',
+		"VALUES" => $arSections,
 	),
 
 	/**
